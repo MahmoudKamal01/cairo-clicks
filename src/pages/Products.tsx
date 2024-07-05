@@ -4,13 +4,19 @@ import { useAppDispatch, useAppSelector } from "@store/hook";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { TProduct } from "@customTypes/product";
-import { actGetProductsByCatPrefix } from "@store/products/productsSlice";
+import {
+  actGetProductsByCatPrefix,
+  productsCleanUp,
+} from "@store/products/productsSlice";
 const Products = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
   const { loading, error, records } = useAppSelector((state) => state.products);
   useEffect(() => {
     dispatch(actGetProductsByCatPrefix(params.prefix as string));
+    return () => {
+      dispatch(productsCleanUp());
+    };
   }, [dispatch, params]);
 
   const productsList =
