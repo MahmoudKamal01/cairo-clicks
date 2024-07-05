@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { Product } from "@components/eCommerce";
+import { Product } from "@components/ecommerce";
 const Products = () => {
   return (
     <Container>
