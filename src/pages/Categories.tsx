@@ -1,4 +1,5 @@
-import { Category } from "@components/ecommerce";
+import { Category } from "@components/eCommerce";
+import { Loading } from "@components/feedback";
 import { actGetCategories } from "@store/categories/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { useEffect } from "react";
@@ -38,7 +39,9 @@ const Categories = () => {
 
   return (
     <Container>
-      <Row>{categoriesList}</Row>
+      <Loading status={loading} error={error}>
+        <Row>{categoriesList}</Row>
+      </Loading>
     </Container>
   );
 };

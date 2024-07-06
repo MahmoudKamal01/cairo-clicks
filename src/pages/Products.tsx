@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { Product } from "@components/ecommerce";
+import { Product } from "@components/eCommerce";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import {
   actGetProductsByCatPrefix,
   productsCleanUp,
 } from "@store/products/productsSlice";
+import { Loading } from "@components/feedback";
 const Products = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
@@ -37,7 +38,9 @@ const Products = () => {
 
   return (
     <Container>
-      <Row>{productsList}</Row>
+      <Loading status={loading} error={error}>
+        <Row>{productsList}</Row>
+      </Loading>
     </Container>
   );
 };
