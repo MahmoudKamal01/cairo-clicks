@@ -1,9 +1,11 @@
+import { GridList } from "@components/common";
 import { Category } from "@components/eCommerce";
 import { Loading } from "@components/feedback";
+import { TCategory } from "@customTypes/category";
 import { actGetCategories } from "@store/categories/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 const Categories = () => {
   const dispatch = useAppDispatch();
@@ -17,30 +19,13 @@ const Categories = () => {
       dispatch(actGetCategories());
     }
   }, [dispatch, records.length]);
-
-  let categoriesList = null;
-
-  if (loading === "pending") {
-    return <h1>Loading...</h1>;
-  } else if (records.length === 0 && loading === "succeeded") {
-    categoriesList = <p>There are no categories.</p>;
-  } else {
-    categoriesList = records.map((record) => (
-      <Col
-        key={record.id}
-        xs={6}
-        md={3}
-        className="d-flex justify-content-center mb-5 mt-2"
-      >
-        <Category {...record} />
-      </Col>
-    ));
-  }
-
   return (
     <Container>
       <Loading status={loading} error={error}>
-        <Row>{categoriesList}</Row>
+        <GridList
+          records={records}
+          renderItem={(record: TCategory) => <Category {...record} />}
+        />
       </Loading>
     </Container>
   );
