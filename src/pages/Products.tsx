@@ -8,7 +8,7 @@ import {
   productsCleanUp,
 } from "@store/products/productsSlice";
 import { Loading } from "@components/feedback";
-import { GridList } from "@components/common";
+import { GridList, Heading } from "@components/common";
 import { TProduct } from "@customTypes/product";
 const Products = () => {
   const params = useParams();
@@ -23,6 +23,10 @@ const Products = () => {
 
   return (
     <Container>
+      <Heading>
+        <span className="text-capitalize"> {params.prefix} </span>
+        Products
+      </Heading>
       <Loading status={loading} error={error}>
         <GridList
           records={records}

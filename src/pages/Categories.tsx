@@ -1,11 +1,10 @@
-import { GridList } from "@components/common";
+import { GridList, Heading } from "@components/common";
 import { Category } from "@components/eCommerce";
 import { Loading } from "@components/feedback";
 import { TCategory } from "@customTypes/category";
 import { actGetCategories } from "@store/categories/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { useEffect } from "react";
-import { Container } from "react-bootstrap";
 
 const Categories = () => {
   const dispatch = useAppDispatch();
@@ -20,14 +19,15 @@ const Categories = () => {
     }
   }, [dispatch, records.length]);
   return (
-    <Container>
+    <>
+      <Heading>Categories</Heading>
       <Loading status={loading} error={error}>
         <GridList
           records={records}
           renderItem={(record: TCategory) => <Category {...record} />}
         />
       </Loading>
-    </Container>
+    </>
   );
 };
 
